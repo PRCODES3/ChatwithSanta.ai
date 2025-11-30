@@ -1,0 +1,20 @@
+.certificate-container {
+  margin-top: 40px;
+}
+
+.certificate-input {
+  padding: 14px;
+  width: 300px;
+  border: 2px solid #ccc;
+  border-radius: 12px;
+}
+
+.certificate-button {
+  background: gold;
+  color: black;
+  padding: 14px 30px;
+  border-radius: 12px;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+}
