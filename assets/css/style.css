@@ -1,114 +1,259 @@
-body {
+/* ================================
+   GLOBAL SITE LAYOUT
+==================================*/
+
+* {
   margin: 0;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  background: #fff4e6;
-  color: #3b1a16;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.screen { display: none; }
-.screen.active { display: block; }
+body {
+  font-family: 'Nunito', sans-serif;
+  background: #fff4e6;
+  color: #333;
+  text-align: center;
+}
+
+img {
+  max-width: 100%;
+}
+
+/* ================================
+   HERO / LANDING
+==================================*/
 
 .hero {
-  display: flex;
-  flex-wrap: wrap;
-  padding: 32px 16px;
-  align-items: center;
-  justify-content: center;
+  background: linear-gradient(180deg, #d33b3b, #b22727);
+  padding: 50px 20px;
+  color: white;
 }
-.hero-text { max-width: 480px; padding: 16px; }
-.hero-text h1 { font-size: 2.4rem; margin-bottom: 8px; }
-.hero-bullets { padding-left: 18px; }
 
-.hero-art { padding: 16px; }
-.santa-hero { max-width: 260px; }
+.hero h1 {
+  font-size: 48px;
+  font-weight: 800;
+}
 
-.primary, .secondary, .small {
+.hero h2 {
+  font-size: 26px;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+.hero-santa {
+  width: 180px;
+  filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
+}
+
+/* ================================
+   BUTTONS
+==================================*/
+
+.cta {
+  background: white;
+  color: #d33b3b;
+  padding: 14px 30px;
+  border-radius: 14px;
   border: none;
-  border-radius: 999px;
-  padding: 10px 20px;
-  font-size: 1rem;
+  font-size: 22px;
+  font-weight: 700;
   cursor: pointer;
+  margin-top: 20px;
 }
-.primary { background: #d33b3b; color: #fff; box-shadow: 0 6px 16px rgba(0,0,0,0.25); }
-.secondary { background: #ffffff; color: #b22222; border: 1px solid #ffc0c0; }
-.small { background:#ffffff; color:#b22222; font-size:.85rem; padding:6px 12px; }
 
-.pricing-grid {
-  display: flex; flex-wrap: wrap;
+.cta-blue {
+  background: #2a6edb;
+  color: white;
+}
+
+.cta-green {
+  background: #34c65a;
+  color: white;
+}
+
+button:hover {
+  transform: scale(1.05);
+  transition: 0.2s ease-in-out;
+}
+
+/* ================================
+   PAGE SECTIONS
+==================================*/
+
+.section {
+  padding: 50px 20px;
+}
+
+.section h2 {
+  font-size: 32px;
+  margin-top: 20px;
+}
+
+/* ================================
+   SCREEN WRAPPER
+==================================*/
+
+#screen-wrapper {
+  padding: 30px;
+}
+
+/* ================================
+   FOOTER
+==================================*/
+
+footer {
+  padding: 20px;
+  background: #d33b3b;
+  color: white;
+  margin-top: 40px;
+  font-size: 14px;
+}
+
+/* ================================
+   MODAL PAYWALL
+==================================*/
+
+.paywall-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: none;
   justify-content: center;
-  gap: 16px;
-  padding: 16px;
-}
-.price-card {
-  background:#ffffff;
-  border-radius:16px;
-  padding:16px;
-  max-width:260px;
-  box-shadow:0 4px 12px rgba(0,0,0,0.1);
-}
-.price-card.featured {
-  border:2px solid #d33b3b;
-}
-.price { font-size:1.8rem; margin:4px 0 8px; }
-
-#app-shell { padding: 8px 8px 40px; }
-.topbar {
-  display:flex; justify-content:space-between; align-items:center;
-  padding:8px 4px;
-}
-.tabs {
-  display:flex; flex-wrap:wrap; gap:4px; justify-content:center;
-  margin-bottom:8px;
-}
-.tab {
-  border:none; background:#ffe2dd; padding:6px 10px;
-  border-radius:999px; font-size:.9rem; cursor:pointer;
-}
-.tab.active { background:#d33b3b; color:#fff; }
-
-.app-screen { display:none; }
-.app-screen.active { display:block; }
-
-.chat-log {
-  height: 260px;
-  max-width: 560px;
-  margin: 0 auto 8px;
-  background:#fff;
-  border-radius:12px;
-  padding:8px;
-  overflow-y:auto;
-}
-.chat-msg { margin-bottom:6px; font-size:.95rem; }
-.chat-msg.me { text-align:right; }
-.chat-input-row {
-  display:flex;
-  max-width:560px;
-  margin:0 auto;
-  gap:6px;
+  align-items: center;
+  z-index: 9999;
 }
 
-.modal {
-  position:fixed; inset:0;
-  background:rgba(0,0,0,0.55);
-  display:flex; align-items:center; justify-content:center;
-  z-index:9999;
+.paywall-box {
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 450px;
+  text-align: center;
 }
-.modal.hidden { display:none; }
 
-.modal-inner {
-  background:#fffdf7;
-  padding:16px;
-  border-radius:12px;
-  max-width:360px;
-  width:90%;
-  box-shadow:0 10px 30px rgba(0,0,0,0.3);
+.paywall-box h2 {
+  color: #d33b3b;
+  margin-bottom: 10px;
 }
-.link {
-  border:none; background:none; color:#d33b3b; text-decoration:underline;
-  cursor:pointer; margin-top:8px;
+
+.paywall-price {
+  font-size: 48px;
+  font-weight: 900;
+  margin: 20px 0;
 }
-.error { color:#d33b3b; font-size:.85rem; margin-top:4px; }
 
-.hidden { display:none; }
+/* ================================
+   INPUT FIELDS
+==================================*/
 
-.note { font-size:.85rem; opacity:.8; }
+.input-field {
+  padding: 14px;
+  width: 90%;
+  max-width: 350px;
+  border-radius: 12px;
+  border: 2px solid #ccc;
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+/* ================================
+   CERTIFICATE PAGE
+==================================*/
+
+.certificate-preview {
+  width: 320px;
+  border: 6px solid gold;
+  padding: 20px;
+  margin: 20px auto;
+  background: white;
+  border-radius: 12px;
+}
+
+.certificate-btn {
+  background: gold;
+  color: #222;
+}
+
+/* ================================
+   CHAT UI
+==================================*/
+
+.chat-box {
+  width: 90%;
+  max-width: 480px;
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 16px;
+  background: white;
+  box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
+.chat-msg {
+  text-align: left;
+  background: #ffe4d6;
+  padding: 12px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.user-msg {
+  background: #d6eaff;
+  text-align: right;
+}
+
+/* ================================
+   REALTIME AI CALL SCREEN
+==================================*/
+
+.call-wrapper {
+  padding: 30px;
+}
+
+.call-santa-img {
+  width: 180px;
+  animation: santaTalk 1.3s infinite alternate;
+}
+
+@keyframes santaTalk {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.05); }
+}
+
+.call-btn {
+  background: #34c65a;
+  color: white;
+  padding: 16px 40px;
+  border-radius: 16px;
+  font-size: 24px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+/* ================================
+   PARENT LOCK
+==================================*/
+
+.parent-lock {
+  width: 90%;
+  max-width: 400px;
+  margin: 40px auto;
+  padding: 20px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.15);
+}
+
+.parent-lock input {
+  width: 100%;
+  padding: 14px;
+  border: 2px solid #aaa;
+  border-radius: 14px;
+  font-size: 18px;
+  margin-bottom: 20px;
+}
