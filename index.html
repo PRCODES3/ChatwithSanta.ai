@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Chat & Call Santa AI 🎅</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="manifest" href="manifest.json" />
+  <script defer src="assets/js/app.js"></script>
+  <script defer src="assets/js/ai_santa.js"></script>
+</head>
+<body>
+
+  <!-- LANDING PAGE FOR SELLING -->
+  <section id="landing" class="screen active">
+    <header class="hero">
+      <div class="hero-text">
+        <h1>🎅 Call & Chat with Santa AI</h1>
+        <p>Kids can talk to a magical, deep-voiced Santa… live, from your phone or browser.</p>
+        <ul class="hero-bullets">
+          <li>📞 Real-time AI Santa Calls (no Twilio needed)</li>
+          <li>💬 GPT-powered Santa chat</li>
+          <li>📜 Nice List certificates</li>
+          <li>🎁 Elf Call Center & callbacks</li>
+        </ul>
+        <button class="primary" onclick="scrollToPricing()">View Pricing & Get Access</button>
+      </div>
+      <div class="hero-art">
+        <img src="assets/svg/santa.svg" alt="Santa AI" class="santa-hero" />
+      </div>
+    </header>
+
+    <section id="features">
+      <h2>What’s Included</h2>
+      <div class="feature-grid">
+        <div class="card">
+          <h3>AI Santa Calls</h3>
+          <p>Kids tap “Call Santa” and have a live voice conversation with a magical deep Santa.</p>
+        </div>
+        <div class="card">
+          <h3>Santa Chat</h3>
+          <p>GPT-powered chat, tuned to be kind, encouraging & Christmas-safe.</p>
+        </div>
+        <div class="card">
+          <h3>Certificates</h3>
+          <p>Generate & download Nice List certificates with the child’s name.</p>
+        </div>
+        <div class="card">
+          <h3>Elf Call Center</h3>
+          <p>Fun elf screen that “routes” messages & callbacks to Santa.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="pricing">
+      <h2>Pricing</h2>
+      <div class="pricing-grid">
+        <div class="price-card">
+          <h3>Elf Pass</h3>
+          <p class="price">$7 / month</p>
+          <ul>
+            <li>5 Santa AI calls / month</li>
+            <li>Unlimited Santa chat</li>
+            <li>Basic certificates</li>
+          </ul>
+          <button class="secondary" onclick="openCheckout('elf')">Buy Elf Pass</button>
+        </div>
+        <div class="price-card featured">
+          <h3>North Pole Pass</h3>
+          <p class="price">$19 / month</p>
+          <ul>
+            <li>Unlimited Santa AI calls</li>
+            <li>Unlimited Santa chat</li>
+            <li>Custom certificates</li>
+            <li>Elf Call Center access</li>
+          </ul>
+          <button class="primary" onclick="openCheckout('northpole')">Get North Pole Pass</button>
+        </div>
+        <div class="price-card">
+          <h3>Family Lifetime</h3>
+          <p class="price">$47 one-time</p>
+          <ul>
+            <li>Lifetime access for one family</li>
+            <li>All features included</li>
+          </ul>
+          <button class="secondary" onclick="openCheckout('lifetime')">Get Lifetime</button>
+        </div>
+      </div>
+      <p class="disclaimer">*Payments handled securely via Stripe. You’ll get a private access link after purchase.</p>
+    </section>
+
+    <section id="cta-bottom">
+      <h2>Ready to let your kids call Santa?</h2>
+      <button class="primary" onclick="openAppFromLanding()">Start Santa AI Experience</button>
+    </section>
+  </section>
+
+  <!-- APP SHELL (AFTER PURCHASE / DEMO) -->
+  <section id="app-shell" class="screen">
+    <button class="back-to-landing" onclick="showScreen('landing')">← Back to Landing</button>
+
+    <header class="topbar">
+      <h1>Santa AI Call Center</h1>
+      <button class="small" onclick="showParentModal()">Parents</button>
+    </header>
+
+    <nav class="tabs">
+      <button onclick="showScreen('home')" data-tab="home" class="tab active">Home</button>
+      <button onclick="showScreen('chat')" data-tab="chat" class="tab">Chat</button>
+      <button onclick="showScreen('call')" data-tab="call" class="tab">Call</button>
+      <button onclick="showScreen('elves')" data-tab="elves" class="tab">Elves</button>
+      <button onclick="showScreen('certificate')" data-tab="certificate" class="tab">Certificate</button>
+      <button onclick="showScreen('characters')" data-tab="characters" class="tab">Characters</button>
+    </nav>
+
+    <main id="app-content">
+      <!-- HOME -->
+      <section id="screen-home" class="app-screen active">
+        <h2>Welcome to Santa’s Hotline 🎅</h2>
+        <p>Pick an option below:</p>
+        <div class="home-actions">
+          <button class="primary" onclick="showScreen('call')">📞 Call Santa</button>
+          <button class="secondary" onclick="showScreen('chat')">💬 Chat with Santa</button>
+          <button class="secondary" onclick="showScreen('certificate')">📜 Get Certificate</button>
+        </div>
+      </section>
+
+      <!-- CHAT -->
+      <section id="screen-chat" class="app-screen">
+        <h2>Chat with Santa</h2>
+        <div id="chat-log" class="chat-log"></div>
+        <div class="chat-input-row">
+          <input id="chat-input" placeholder="Type your message to Santa..." />
+          <button class="primary" onclick="sendSantaChat()">Send</button>
+        </div>
+      </section>
+
+      <!-- CALL -->
+      <section id="screen-call" class="app-screen">
+        <h2>Call Santa (AI Voice)</h2>
+        <p id="call-status">Tap to start a magical call with Santa.</p>
+        <button class="primary" onclick="startSantaCall()">📞 Start Call</button>
+        <button class="secondary" onclick="endSantaCall()">⏹ End Call</button>
+        <p class="note">Requires microphone access.</p>
+      </section>
+
+      <!-- ELVES -->
+      <section id="screen-elves" class="app-screen">
+        <h2>Elf Call Center 🧝</h2>
+        <p>Our elves are routing messages to Santa!</p>
+        <div id="elf-status" class="elf-panel">
+          <p>Queued callbacks: <span id="callback-count">3</span></p>
+          <p>Next callback in: <span id="callback-timer">05:12</span></p>
+        </div>
+        <button class="secondary" onclick="scheduleCallback()">📲 Schedule Santa Callback</button>
+      </section>
+
+      <!-- CERTIFICATE -->
+      <section id="screen-certificate" class="app-screen">
+        <h2>Nice List Certificate</h2>
+        <input id="cert-name" placeholder="Child’s name" />
+        <button class="primary" onclick="generateCertificate()">Generate Certificate</button>
+        <canvas id="cert-canvas" width="800" height="600"></canvas>
+        <button id="download-cert-btn" class="secondary hidden" onclick="downloadCertificate()">Download PNG</button>
+      </section>
+
+      <!-- CHARACTERS -->
+      <section id="screen-characters" class="app-screen">
+        <h2>Choose Your Magic Character</h2>
+        <div class="character-grid">
+          <button onclick="setCharacter('santa')" class="character-btn">🎅 Santa</button>
+          <button onclick="setCharacter('fairy')" class="character-btn">🧚 Fairy</button>
+          <button onclick="setCharacter('bunny')" class="character-btn">🐰 Bunny</button>
+          <button onclick="setCharacter('angel')" class="character-btn">👼 Angel</button>
+        </div>
+        <p class="note">Character changes voice style & responses (AI tuning hook).</p>
+      </section>
+    </main>
+  </section>
+
+  <!-- PREMIUM PAYWALL MODAL -->
+  <div id="paywall" class="modal hidden">
+    <div class="modal-inner">
+      <h2>Unlock Full Santa AI Access</h2>
+      <p>Parents only: choose a plan to unlock full features.</p>
+      <div class="pricing-mini">
+        <button onclick="openCheckout('elf')" class="secondary">Elf Pass — $7/mo</button>
+        <button onclick="openCheckout('northpole')" class="primary">North Pole Pass — $19/mo</button>
+      </div>
+      <button class="link" onclick="closePaywall()">Not now</button>
+    </div>
+  </div>
+
+  <!-- PARENT LOCK MODAL (simple math gate) -->
+  <div id="parent-modal" class="modal hidden">
+    <div class="modal-inner">
+      <h2>Parent Access</h2>
+      <p>To continue, please answer: 6 + 4 = ?</p>
+      <input id="parent-answer" />
+      <button class="primary" onclick="checkParentGate()">Submit</button>
+      <button class="link" onclick="closeParentModal()">Cancel</button>
+      <div id="parent-error" class="error"></div>
+      <div id="parent-panel" class="hidden">
+        <h3>Parent Controls</h3>
+        <ul>
+          <li>Toggle AI voice vs text only</li>
+          <li>Set call time limits</li>
+          <li>View Stripe setup guide</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
