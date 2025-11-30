@@ -1,10 +1,12 @@
-<h1>📞 Call Santa</h1>
+<div class="page call-screen">
+    <h1>📞 Call Santa</h1>
+    <p id="call-status">Press the button when you're ready!</p>
 
-<p id="call-status">Tap “Start Call” to talk to Santa!</p>
+    <button class="cta-red" onclick="startSantaCall()">
+        🎅 Start AI Santa Call
+    </button>
 
-<button class="call-btn" onclick="callSantaAI()">
-    🎅 Start AI Santa Call
-</button>
+    <img src="../../assets/svg/santa_talk.svg" class="call-anim">
+</div>
 
 <script src="../../assets/js/ai.js"></script>
-
